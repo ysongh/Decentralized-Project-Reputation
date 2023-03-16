@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@polybase/client": "^0.3.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

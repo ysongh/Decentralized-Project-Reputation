@@ -1,10 +1,11 @@
-import './App.css'
+import './App.css';
+import PolybaseTest from './pages/PolybaseTest';
 
 function App() {
-
+  
   return (
     <div className="App">
-      <h1>Decentralized Project Reputation</h1>
+      <PolybaseTest />
     </div>
   )
 }
