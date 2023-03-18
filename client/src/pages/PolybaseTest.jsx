@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Container, Heading, Input, Button } from '@chakra-ui/react'
 import { Polybase } from "@polybase/client";
 
 const db = new Polybase({
@@ -68,28 +69,28 @@ function PolybaseTest() {
   }
 
   return (
-    <div>
-      <h1>Test</h1>
-      <button onClick={createCollection}>
+    <Container maxW='1000px'>
+      <Heading my='3'>Test</Heading>
+      <Button onClick={createCollection}>
         Create Collection
-      </button>
+      </Button>
       <br />
       <br />
-      <input placeholder='City' onChange={(e) => setCity(e.target.value)}/>
-      <button onClick={addData}>
+      <Input placeholder='City' onChange={(e) => setCity(e.target.value)}/>
+      <Button onClick={addData}>
         Add
-      </button>
+      </Button>
       <br />
       <br />
-      <button onClick={readData}>
+      <Button onClick={readData}>
         Read
-      </button>
+      </Button>
       {cities.map(c => (
         <div key={c.data.id}>
           <p>{c.data.name}</p>
         </div>
       ))}
-    </div>
+    </Container>
   )
 }
 

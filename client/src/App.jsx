@@ -1,13 +1,14 @@
+import { ChakraProvider } from '@chakra-ui/react';
+
 import './App.css';
 import PolybaseTest from './pages/PolybaseTest';
 
 function App() {
-  
   return (
-    <div className="App">
+    <ChakraProvider>
       <PolybaseTest />
-    </div>
+    </ChakraProvider>
   )
 }
 
-export default App
+export default App;
