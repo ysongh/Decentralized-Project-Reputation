@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
+import AddProject from './pages/AddProject';
 import PolybaseTest from './pages/PolybaseTest';
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
             path="/test"
             element={
               <PolybaseTest />} />
+          <Route
+            path="/add-project"
+            element={
+              <AddProject />} />
           <Route
             path="/"
             element={

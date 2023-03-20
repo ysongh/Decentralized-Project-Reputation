@@ -35,6 +35,7 @@ function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
+          <Link as={ReactLink} to="/add-project">Add Project</Link>
           <Link as={ReactLink} to="/test">Test</Link>
           <Spacer />
           <Button onClick={connectMetamask}>
