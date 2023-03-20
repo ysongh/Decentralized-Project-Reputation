@@ -26,7 +26,7 @@ function App() {
           <Route
             path="/add-project"
             element={
-              <AddProject />} />
+              <AddProject contractDPR={contractDPR} />} />
           <Route
             path="/"
             element={
