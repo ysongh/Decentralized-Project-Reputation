@@ -8,13 +8,15 @@ import PolybaseTest from './pages/PolybaseTest';
 
 function App() {
   const [ethAddress, setETHAddress] = useState('');
+  const [contractDPR, setContractDPR] = useState(null);
 
   return (
     <ChakraProvider>
       <HashRouter>
         <Navbar
           ethAddress={ethAddress}
-          setETHAddress={setETHAddress} />
+          setETHAddress={setETHAddress}
+          setContractDPR={setContractDPR} />
         <Routes>
           <Route
             path="/test"

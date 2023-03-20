@@ -1,10 +1,28 @@
 import { Link as ReactLink } from 'react-router-dom';
 import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 
-function Navbar({ ethAddress, setETHAddress }) {
+import ProjectReputation from "../../artifacts/contracts/ProjectReputation.sol/ProjectReputation.json";
+
+const SCROLL_CONTRACT_ADDRESS = "0xFda2FCAB7c8c2FDB3Ef69C37Ee94f1e7A94f0eD3";
+
+function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
   const connectMetamask = async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    setETHAddress(accounts[0]);
+    try{
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      setETHAddress(accounts[0]);
+  
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+  
+      const contract = new ethers.Contract(SCROLL_CONTRACT_ADDRESS, ProjectReputation.abi, signer);
+      console.log(contract);
+      setContractDPR(contract);
+
+    } catch(error) {
+      console.error(error);
+    }
+   
   }
   
   return (
