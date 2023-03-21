@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import AddProject from './pages/AddProject';
+import ProjectDetail from './pages/ProjectDetail';
 import PolybaseTest from './pages/PolybaseTest';
 
 function App() {
@@ -23,6 +24,12 @@ function App() {
             path="/test"
             element={
               <PolybaseTest />} />
+          <Route
+            path="/project-detail"
+            element={
+              <ProjectDetail
+                ethAddress={ethAddress}
+                contractDPR={contractDPR} />} />
           <Route
             path="/add-project"
             element={
