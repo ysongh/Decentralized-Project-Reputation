@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { Container, Center, Box, FormControl, FormLabel, Input, Heading, Button } from '@chakra-ui/react';
+import { Container, Center, Box, Heading, Button } from '@chakra-ui/react';
 
 function ProjectDetail({ ethAddress, contractDPR }) {
-  const [rates, setRates] = useState('');
+  const [project, setProject] = useState({});
 
   useEffect(() => {
-    if(contractDPR) getRating()
+    if(contractDPR) getProject()
   }, [contractDPR])
   
 
-  const getRating = async () => {
+  const getProject = async () => {
     try {
-      const rates = await contractDPR.getProjectRating(ethAddress);
-      setRates(rates.toString());
+      const projectData = await contractDPR.projects("0");
+      setProject(projectData);
+      
     } catch(error) {
       console.error(error);
     }
@@ -22,8 +23,9 @@ function ProjectDetail({ ethAddress, contractDPR }) {
     <Container maxW='1000px'>
       <Center>
         <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
-          <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail</Heading>
-          <p>{rates} rating</p>
+          <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail {project.id.toString()}</Heading>
+          <p>{project.name}</p>
+          <p>{project.owner}</p>
         </Box>
       </Center>
     </Container>
