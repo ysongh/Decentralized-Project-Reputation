@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Center, Box, Heading, Button } from '@chakra-ui/react';
 
 function ProjectDetail({ ethAddress, contractDPR }) {
+  const { id } = useParams();
+
   const [project, setProject] = useState({});
 
   useEffect(() => {
@@ -11,7 +14,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const getProject = async () => {
     try {
-      const projectData = await contractDPR.projects("0");
+      const projectData = await contractDPR.projects(id);
       setProject(projectData);
       
     } catch(error) {
@@ -23,7 +26,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
     <Container maxW='1000px'>
       <Center>
         <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
-          <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail {project.id.toString()}</Heading>
+          <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail {project.id?.toString()}</Heading>
           <p>{project.name}</p>
           <p>{project.owner}</p>
         </Box>
