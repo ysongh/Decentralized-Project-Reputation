@@ -33,6 +33,16 @@ function ProjectDetail({ ethAddress, contractDPR }) {
     }
   }
 
+  const rateProject = async (num) => {
+    try {
+      const transaction = await contractDPR.rateAProject(id, num);
+      const tx = await transaction.wait();
+      console.log(tx);
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Container maxW='1000px'>
       <Center>
@@ -45,8 +55,8 @@ function ProjectDetail({ ethAddress, contractDPR }) {
       </Center>
       <RateModal
         showRateModal={showRateModal}
-        setShowRateModal={setShowRateModal}
-        closeRateModal={closeRateModal}  />
+        closeRateModal={closeRateModal}
+        rateProject={rateProject}  />
     </Container>
   )
 }

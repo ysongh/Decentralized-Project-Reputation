@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -13,11 +13,11 @@ import {
   Button
 } from '@chakra-ui/react';
 
-function RateModal({ showRateModal, setShowRateModal, closeRateModal }) {
+function RateModal({ showRateModal, closeRateModal, rateProject }) {
+  const [num, setNum] = useState("");
 
   return (
     <div>
-
       <Modal
         isOpen={showRateModal}
         onClose={closeRateModal}
@@ -29,12 +29,12 @@ function RateModal({ showRateModal, setShowRateModal, closeRateModal }) {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Rate</FormLabel>
-              <Input placeholder='1-5' />
+              <Input placeholder='1-5' onChange={(e) => setNum(e.target.value)} />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
+            <Button colorScheme='blue' mr={3} onClick={() => rateProject(num)}>
               Rate
             </Button>
             <Button onClick={closeRateModal}>Cancel</Button>
