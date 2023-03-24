@@ -16,7 +16,7 @@ export const createCollection = async () => {
         constructor (id: string, name: string, description: string) {
           this.id = id;
           this.name = name;
-          this.description: description;
+          this.description = description;
         }
       }
     `,
