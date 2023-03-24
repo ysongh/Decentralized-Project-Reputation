@@ -31,7 +31,7 @@ function Projects({ contractDPR }) {
             <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail</Heading>
             <p>{p.name}</p>
             <p>{p.owner}</p>
-            <Button mt="4" onClick={() => navigate(`/project-detail/${p.id.toString()}`)}>View</Button>
+            <Button mt="4" onClick={() => navigate(`/project-detail/${p.owner}/${p.id.toString()}`)}>View</Button>
           </Box>
         ))}
       </SimpleGrid>

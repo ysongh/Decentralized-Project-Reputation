@@ -26,7 +26,7 @@ function App() {
             element={
               <PolybaseTest />} />
           <Route
-            path="/project-detail/:id"
+            path="/project-detail/:address/:id"
             element={
               <ProjectDetail
                 ethAddress={ethAddress}

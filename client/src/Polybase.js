@@ -37,9 +37,20 @@ export const addProjectToPB = async (address, name, description) => {
   }
 }
 
-export const addProjectFromPB = async () => {
+export const getProjectsFromPB = async () => {
   try{
     const data = await db.collection("Project").get();
+    console.log(data);
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const getProjectFromPB = async (address) => {
+  try{
+    const data = await db.collection("Project").record(address).get();
     console.log(data);
     return data.data;
   } catch (error) {
