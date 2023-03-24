@@ -27,7 +27,7 @@ function Projects({ contractDPR }) {
       <Heading>Projects</Heading>
       <SimpleGrid minChildWidth='120px' spacing='40px'>
         {projects.map(p => (
-          <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
+          <Box key={p.id.toString()} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
             <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail</Heading>
             <p>{p.name}</p>
             <p>{p.owner}</p>
