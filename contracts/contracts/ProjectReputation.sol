@@ -19,12 +19,19 @@ contract ProjectReputation {
 
     constructor() {}
 
+    modifier isVoted(uint id) {
+        for(uint i = 0; i < projects[id].voters.length; i++) {
+            require(projects[id].voters[i] != msg.sender, "Already voted");
+        }
+        _;
+    } 
+
     function addProject(address contractAddress) external {
         projects.push(Project(projectCount, contractAddress, new uint[](0), new address[](0), msg.sender));
         projectCount++;
     }
 
-    function rateAProject(uint id, uint num) external {
+    function rateAProject(uint id, uint num) external isVoted(id) {
         require(num < 6, "Rate must be less than 5");
         
         projects[id].ratings.push(num);
