@@ -9,7 +9,7 @@ contract ProjectReputation {
 
     struct Project{
         uint id;
-        string name;
+        address contractAddress;
         uint[] ratings;
         address[] voters;
         address owner;
@@ -19,8 +19,8 @@ contract ProjectReputation {
 
     constructor() {}
 
-    function addProject(string memory name) external {
-        projects.push(Project(projectCount, name, new uint[](0), new address[](0), msg.sender));
+    function addProject(address contractAddress) external {
+        projects.push(Project(projectCount, contractAddress, new uint[](0), new address[](0), msg.sender));
         projectCount++;
     }
 
