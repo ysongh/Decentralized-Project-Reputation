@@ -7,15 +7,19 @@ function AddProject({ contractDPR }) {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState("");
 
   const submitProject = async () => {
     try {
+      setLoading(true);
       addProjectToPB(address, name, description);
-      const transaction = await contractDPR.addProject(name);
+      const transaction = await contractDPR.addProject(address);
       const tx = await transaction.wait();
       console.log(tx);
+      setLoading(false);
     } catch(error) {
       console.error(error);
+      setLoading(false);
     }
   }
 
@@ -37,7 +41,9 @@ function AddProject({ contractDPR }) {
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" onClick={submitProject}>Add</Button>
+          <Button mt="4" onClick={submitProject} isLoading={loading} loadingText='Submitting'>
+            Add
+          </Button>
         </Box>
       </Center>
     </Container>
