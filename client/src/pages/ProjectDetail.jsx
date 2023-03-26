@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Center, Box, Heading, Button } from '@chakra-ui/react';
+import { Container, FormControl, FormLabel, Textarea, Flex, Box, Avatar, Heading, Button } from '@chakra-ui/react';
 
-import { getProjectFromPB } from '../Polybase';
+import { getProjectFromPB, addCommentToPB } from '../Polybase';
 import RateModal from "../components/RateModal";
 
 function ProjectDetail({ ethAddress, contractDPR }) {
@@ -11,11 +11,16 @@ function ProjectDetail({ ethAddress, contractDPR }) {
   const [ratings, setRatings] = useState("");
   const [moreproject, setMoreProject] = useState({});
   const [showRateModal, setShowRateModal] = useState(false);
+  const [comment, setComment] = useState("");
+  const [loadComment, setLoadComment] = useState(false);
 
   useEffect(() => {
     if(contractDPR) getProject()
   }, [contractDPR])
 
+  useEffect(() => {
+    getMoreProject()
+  }, [])
 
   const openRateModal = () => {
     setShowRateModal(true);
@@ -30,11 +35,16 @@ function ProjectDetail({ ethAddress, contractDPR }) {
       const projectData = await contractDPR.getRatingsByProject(id);
       console.log(projectData.toString())
       setRatings(projectData.toString());
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
+  const getMoreProject = async () => {
+    try {
       const moreProjectData = await getProjectFromPB(address);
       console.log(moreProjectData)
       setMoreProject(moreProjectData);
-      
     } catch(error) {
       console.error(error);
     }
@@ -50,17 +60,40 @@ function ProjectDetail({ ethAddress, contractDPR }) {
     }
   }
 
+  const addComment = async (id, comment) => {
+    try {
+      setLoadComment(true);
+      const data = await addCommentToPB(id, comment);
+      setComment("");
+      setMoreProject(data);
+      setLoadComment(false);
+    } catch(error) {
+      console.error(error);
+      setLoadComment(false);
+    }
+  }
   return (
     <Container maxW='1000px'>
-      <Center>
-        <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
-          <Heading textAlign="center" fontSize="3xl" mb="4">{moreproject.name}</Heading>
-          <p>{moreproject.description}</p>
-          <p>{address}</p>
-          <p>Rating: {ratings}</p>
-          <Button onClick={openRateModal}>Rate</Button>
-        </Box>
-      </Center>
+      <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
+        <Heading fontSize="3xl" mb="4">{moreproject.name}</Heading>
+        <p>{moreproject.description}</p>
+        <p>{address}</p>
+        <p>Rating: {ratings}</p>
+        <Button onClick={openRateModal}>Rate</Button>
+      </Box>
+      <FormControl mt='3' mb='6'>
+        <FormLabel htmlFor='description'>Comment</FormLabel>
+        <Textarea value={comment} onChange={(e) => setComment(e.target.value)} />
+        <Button onClick={() => addComment(moreproject.id, comment)} isLoading={loadComment} loadingText='Adding'>
+          Add
+        </Button>
+      </FormControl>
+      {moreproject?.comments?.map((comment, index) => (
+        <Flex mb='3'>
+          <Avatar size='sm' name='user' mr='3' />
+          <p key={index}>{comment}</p>
+        </Flex>
+      ))}
       <RateModal
         showRateModal={showRateModal}
         closeRateModal={closeRateModal}

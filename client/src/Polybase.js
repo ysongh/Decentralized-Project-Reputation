@@ -1,7 +1,7 @@
 import { Polybase } from "@polybase/client";
 
 const db = new Polybase({
-  defaultNamespace: "projecttime1",
+  defaultNamespace: "projecttime2",
 });
 
 export const createCollection = async () => {
@@ -26,7 +26,7 @@ export const createCollection = async () => {
         }
       }
     `,
-      "projecttime1"
+      "projecttime2"
     ); // your-namespace is optional if you have defined a default namespace
   } catch (error) {
     console.log(error);
@@ -58,6 +58,18 @@ export const getProjectFromPB = async (address) => {
   try{
     const data = await db.collection("Project").record(address).get();
     console.log(data);
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const addCommentToPB = async (id, comment) => {
+  try{
+    const data = await db.collection("Project")
+      .record(id)
+      .call("addComment", [comment]);
     return data.data;
   } catch (error) {
     console.log(error);
