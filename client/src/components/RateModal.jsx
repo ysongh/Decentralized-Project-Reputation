@@ -34,7 +34,7 @@ function RateModal({ showRateModal, closeRateModal, rateProject }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => rateProject(num)}>
+            <Button bgColor='#ba52ed' mr={3} onClick={() => rateProject(num)}>
               Rate
             </Button>
             <Button onClick={closeRateModal}>Cancel</Button>

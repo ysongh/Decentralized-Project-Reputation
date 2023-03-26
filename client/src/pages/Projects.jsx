@@ -55,7 +55,9 @@ function Projects({ contractDPR }) {
                 <Td>{p.data.name}</Td>
                 <Td>{p.data.description}</Td>
                 <Td>
-                  <Button onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>View</Button>
+                  <Button bgColor='#ff99fe' onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>
+                    View
+                  </Button>
                 </Td>
               </Tr>
             ))}

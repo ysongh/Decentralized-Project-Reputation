@@ -41,7 +41,7 @@ function AddProject({ contractDPR }) {
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" onClick={submitProject} isLoading={loading} loadingText='Submitting'>
+          <Button mt="4" bgColor='#ff99fe' onClick={submitProject} isLoading={loading} loadingText='Submitting'>
             Add
           </Button>
         </Box>

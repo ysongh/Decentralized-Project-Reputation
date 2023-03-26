@@ -79,12 +79,14 @@ function ProjectDetail({ ethAddress, contractDPR }) {
         <p>{moreproject.description}</p>
         <p>{address}</p>
         <p>Rating: {ratings}</p>
-        <Button onClick={openRateModal}>Rate</Button>
+        <Button bgColor="#ba52ed" mt='2' onClick={openRateModal}>
+          Rate
+        </Button>
       </Box>
       <FormControl mt='3' mb='6'>
         <FormLabel htmlFor='description'>Comment</FormLabel>
         <Textarea value={comment} onChange={(e) => setComment(e.target.value)} />
-        <Button onClick={() => addComment(moreproject.id, comment)} isLoading={loadComment} loadingText='Adding'>
+        <Button bgColor='#ff99fe' mt='1' onClick={() => addComment(moreproject.id, comment)} isLoading={loadComment} loadingText='Adding'>
           Add
         </Button>
       </FormControl>

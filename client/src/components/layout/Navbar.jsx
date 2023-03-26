@@ -31,14 +31,14 @@ function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
             <Link as={ReactLink} to="/">
-              <Heading color="green" mt="3" mb="5">Project Reputation</Heading>
+              <Heading color="#ba52ed" fontSize='3xl' mt="3" mb="5">Project Reputation</Heading>
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/add-project">Add Project</Link>
           <Link as={ReactLink} to="/test">Test</Link>
           <Spacer />
-          <Button onClick={connectMetamask}>
+          <Button onClick={connectMetamask} bgColor='#ff99fe'>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
         </Flex>
