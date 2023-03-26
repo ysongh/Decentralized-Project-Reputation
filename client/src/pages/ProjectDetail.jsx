@@ -33,8 +33,13 @@ function ProjectDetail({ ethAddress, contractDPR }) {
   const getProject = async () => {
     try {
       const projectData = await contractDPR.getRatingsByProject(id);
-      console.log(projectData.toString())
-      setRatings(projectData.toString());
+     
+      const scores = projectData.toString().split(",");
+      let total = 0;
+      for(let i = 0; i < scores.length; i++){
+        total += +scores[i];
+      }
+      setRatings(total / scores.length);
     } catch(error) {
       console.error(error);
     }
@@ -78,7 +83,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
         <Heading fontSize="3xl" mb="4">{moreproject.name}</Heading>
         <p>{moreproject.description}</p>
         <p>{address}</p>
-        <p>Rating: {ratings}</p>
+        <p>Rating: {ratings} / 5</p>
         <Button bgColor="#ba52ed" mt='2' onClick={openRateModal}>
           Rate
         </Button>
