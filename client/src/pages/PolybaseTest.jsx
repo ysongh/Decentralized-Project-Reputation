@@ -3,12 +3,13 @@ import { Container, Heading, Input, Button } from '@chakra-ui/react'
 import { Polybase } from "@polybase/client";
 
 const db = new Polybase({
-  defaultNamespace: "projecttime",
+  defaultNamespace: "projecttime-1",
 });
 
 function PolybaseTest() {
   const [city, setCity] = useState("");
   const [cities, setCities] = useState([]);
+  const [comment, setComment] = useState("");
 
   const createCollection = async () => {
     try{
@@ -17,15 +18,21 @@ function PolybaseTest() {
         collection City {
           id: string;
           name: string;
+          comments: string[];
           country?: string;
 
           constructor (id: string, name: string) {
             this.id = id;
             this.name = name;
+            this.comments = [];
           }
 
           setCountry (country: string) {
             this.country = country;
+          }
+
+          addComment (comment: string) {
+            this.comments.push(comment);
           }
         }
 
@@ -40,7 +47,7 @@ function PolybaseTest() {
           }
         }
       `,
-        "projecttime"
+        "projecttime-1"
       ); // your-namespace is optional if you have defined a default namespace
     } catch (error) {
       
@@ -68,6 +75,13 @@ function PolybaseTest() {
     }
   }
 
+  const updateRecord = async () => {
+    // .create(functionName, args) args array is defined by the updateName fn in collection schema
+    const recordData = await db.collection("City")
+      .record("newyork")
+      .call("addComment", [comment]);
+  }
+
   return (
     <Container maxW='1000px'>
       <Heading my='3'>Test</Heading>
@@ -80,6 +94,10 @@ function PolybaseTest() {
       <Button onClick={addData}>
         Add
       </Button>
+      <Input placeholder='Comment' onChange={(e) => setComment(e.target.value)}/>
+      <Button onClick={updateRecord}>
+        comment
+      </Button>
       <br />
       <br />
       <Button onClick={readData}>
@@ -88,6 +106,9 @@ function PolybaseTest() {
       {cities.map(c => (
         <div key={c.data.id}>
           <p>{c.data.name}</p>
+          {c.data.comments.map(text => (
+            <p key={text}>- {text}</p>
+          ))}
         </div>
       ))}
     </Container>

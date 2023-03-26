@@ -12,11 +12,17 @@ export const createCollection = async () => {
         id: string;
         name: string;
         description: string;
+        comments: string[];
 
         constructor (id: string, name: string, description: string) {
           this.id = id;
           this.name = name;
           this.description = description;
+          this.comments = [];
+        }
+
+        addComment (comment: string) {
+          this.comments.push(comment);
         }
       }
     `,
