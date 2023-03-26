@@ -42,4 +42,12 @@ contract ProjectReputation {
     function getProjects() external view returns (Project[] memory) {
         return projects;
     }
+
+    function getRatingsByProject(uint id) external view returns (uint[] memory) {
+        return projects[id].ratings;
+    }
+
+    function getVotersByProject(uint id) external view returns (address[] memory) {
+        return projects[id].voters;
+    }
 }
