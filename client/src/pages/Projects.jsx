@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, SimpleGrid, Box, Heading, Button } from '@chakra-ui/react';
+import {
+  Container,
+  Heading,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from '@chakra-ui/react';
 
 import { getProjectsFromPB } from '../Polybase';
 
@@ -27,15 +38,30 @@ function Projects({ contractDPR }) {
   return (
     <Container maxW='1000px'>
       <Heading>Projects</Heading>
-      <SimpleGrid minChildWidth='120px' spacing='40px'>
-        {projects.map((p, index) => (
-          <Box key={index} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
-            <Heading fontSize="3xl" mb="4">{p.data.name}</Heading>
-            <p>{p.data.description}</p>
-            <Button mt="4" onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>View</Button>
-          </Box>
-        ))}
-      </SimpleGrid>
+      <TableContainer>
+        <Table variant='simple'>
+          <Thead>
+            <Tr>
+              <Th>ID</Th>
+              <Th>Name</Th>
+              <Th>Description</Th>
+              <Th></Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {projects.map((p, index) => (
+              <Tr key={index}>
+                <Td>{index + 1}</Td>
+                <Td>{p.data.name}</Td>
+                <Td>{p.data.description}</Td>
+                <Td>
+                  <Button onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>View</Button>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </Container>
   )
 }
