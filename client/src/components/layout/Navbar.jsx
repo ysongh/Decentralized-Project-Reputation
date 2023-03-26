@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 
 import ProjectReputation from "../../artifacts/contracts/ProjectReputation.sol/ProjectReputation.json";
 
-const SCROLL_CONTRACT_ADDRESS = "0x2D4C7f435b00D22c3C9074D7efCf8d5727577B72";
+const SCROLL_CONTRACT_ADDRESS = "0xB7041238e3f1985b0a6A2AC07d48335E262aaF3E";
 
 function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
   const connectMetamask = async () => {

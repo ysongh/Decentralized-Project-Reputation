@@ -8,7 +8,7 @@ import RateModal from "../components/RateModal";
 function ProjectDetail({ ethAddress, contractDPR }) {
   const { address, id } = useParams();
 
-  const [project, setProject] = useState({});
+  const [ratings, setRatings] = useState("");
   const [moreproject, setMoreProject] = useState({});
   const [showRateModal, setShowRateModal] = useState(false);
 
@@ -27,10 +27,12 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const getProject = async () => {
     try {
-      const projectData = await contractDPR.projects(id);
-      setProject(projectData);
+      const projectData = await contractDPR.getRatingsByProject(id);
+      console.log(projectData.toString())
+      setRatings(projectData.toString());
 
       const moreProjectData = await getProjectFromPB(address);
+      console.log(moreProjectData)
       setMoreProject(moreProjectData);
       
     } catch(error) {
@@ -52,10 +54,10 @@ function ProjectDetail({ ethAddress, contractDPR }) {
     <Container maxW='1000px'>
       <Center>
         <Box borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
-          <Heading textAlign="center" fontSize="3xl" mb="4">Project Detail {project.id?.toString()}</Heading>
-          <p>{project.name}</p>
+          <Heading textAlign="center" fontSize="3xl" mb="4">{moreproject.name}</Heading>
           <p>{moreproject.description}</p>
-          <p>{project.owner}</p>
+          <p>{address}</p>
+          <p>Rating: {ratings}</p>
           <Button onClick={openRateModal}>Rate</Button>
         </Box>
       </Center>

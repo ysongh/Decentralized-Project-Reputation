@@ -32,7 +32,7 @@ function Projects({ contractDPR }) {
           <Box key={index} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' width='500px' mt='5'>
             <Heading fontSize="3xl" mb="4">{p.data.name}</Heading>
             <p>{p.data.description}</p>
-            <Button mt="4" onClick={() => navigate(`/project-detail/${p.owner}/${index}`)}>View</Button>
+            <Button mt="4" onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>View</Button>
           </Box>
         ))}
       </SimpleGrid>
