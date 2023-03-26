@@ -1,0 +1,23 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ProjectReputation
+    network: goerli
+    source:
+      address: "0xA357E1EB39197D22Ee43d290C0507C1Cf92e8988"
+      abi: ProjectReputation
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - rated
+      abis:
+        - name: ProjectReputation
+          file: ./abis/ProjectReputation.json
+      eventHandlers:
+        - event: rated(uint256,uint256,address)
+          handler: handlerated
+      file: ./src/project-reputation.ts

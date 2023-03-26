@@ -18,6 +18,7 @@ package-lock.json
 artifacts
 cache
 .env
+build
 
 # Editor directories and files
 .vscode/*
