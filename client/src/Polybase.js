@@ -1,7 +1,7 @@
 import { Polybase } from "@polybase/client";
 
 const db = new Polybase({
-  defaultNamespace: "projecttime2",
+  defaultNamespace: "projecttime3",
 });
 
 export const createCollection = async () => {
@@ -10,12 +10,14 @@ export const createCollection = async () => {
       @public
       collection Project {
         id: string;
+        contractAddress: string;
         name: string;
         description: string;
         comments: string[];
 
-        constructor (id: string, name: string, description: string) {
+        constructor (id: string, contractAddress: string, name: string, description: string) {
           this.id = id;
+          this.contractAddress = contractAddress;
           this.name = name;
           this.description = description;
           this.comments = [];
@@ -26,7 +28,7 @@ export const createCollection = async () => {
         }
       }
     `,
-      "projecttime2"
+      "projecttime3"
     ); // your-namespace is optional if you have defined a default namespace
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Heading, Input, Button } from '@chakra-ui/react'
 import { Polybase } from "@polybase/client";
+import { createCollection } from '../Polybase';
 
 const db = new Polybase({
   defaultNamespace: "projecttime-1",
@@ -11,7 +12,7 @@ function PolybaseTest() {
   const [cities, setCities] = useState([]);
   const [comment, setComment] = useState("");
 
-  const createCollection = async () => {
+  const createCollectionTest = async () => {
     try{
       await db.applySchema(`
         @public
