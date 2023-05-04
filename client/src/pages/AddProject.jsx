@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Center, Box, FormControl, FormLabel, Input, Textarea, Heading, Button } from '@chakra-ui/react';
+import { Container, Center, Box, FormControl, FormLabel, Input, Textarea, Heading, Text, Button } from '@chakra-ui/react';
 
 import { addProjectToPB } from '../Polybase';
 
@@ -12,10 +12,12 @@ function AddProject({ contractDPR }) {
   const submitProject = async () => {
     try {
       setLoading(true);
-      addProjectToPB(address, name, description);
+      
       const transaction = await contractDPR.addProject(address);
       const tx = await transaction.wait();
       console.log(tx);
+
+      addProjectToPB(address, name, description);
       setLoading(false);
     } catch(error) {
       console.error(error);
@@ -41,9 +43,12 @@ function AddProject({ contractDPR }) {
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </FormControl>
 
-          <Button mt="4" bgColor='#ff99fe' onClick={submitProject} isLoading={loading} loadingText='Submitting'>
-            Add
-          </Button>
+          {contractDPR
+            ? <Button mt="4" bgColor='#ff99fe' onClick={submitProject} isLoading={loading} loadingText='Submitting'>
+                Add
+              </Button>
+            : <Text color="red" fontSize="xl">Please connect to your wallet</Text>
+          }
         </Box>
       </Center>
     </Container>
