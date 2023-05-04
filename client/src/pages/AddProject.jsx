@@ -17,7 +17,9 @@ function AddProject({ contractDPR }) {
       const tx = await transaction.wait();
       console.log(tx);
 
-      addProjectToPB(address, name, description);
+      const count = await contractDPR.projectCount();
+
+      addProjectToPB(count.toString(), address, name, description);
       setLoading(false);
     } catch(error) {
       console.error(error);

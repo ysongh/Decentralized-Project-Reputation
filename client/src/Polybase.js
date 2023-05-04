@@ -36,9 +36,9 @@ export const createCollection = async () => {
   }
 }
 
-export const addProjectToPB = async (address, name, description) => {
+export const addProjectToPB = async (id, address, name, description) => {
   try{
-    await db.collection("Project").create([address, name, description]); 
+    await db.collection("Project").create([id, address, name, description]); 
   } catch (error) {
     console.log(error);
     return null;
