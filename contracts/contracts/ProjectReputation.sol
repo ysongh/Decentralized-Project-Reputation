@@ -4,7 +4,6 @@ pragma solidity ^0.8.18;
 contract ProjectReputation {
     uint public projectCount = 0;
 
-    uint numberOfChallenges;
     Project[] public projects;
 
     struct Project{
