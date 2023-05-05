@@ -49,13 +49,13 @@ function Projects({ contractDPR }) {
             </Tr>
           </Thead>
           <Tbody>
-            {projects.map((p, index) => (
-              <Tr key={index}>
-                <Td>{index + 1}</Td>
+            {projects.map((p) => (
+              <Tr key={p.data.id}>
+                <Td>{p.data.id}</Td>
                 <Td>{p.data.name}</Td>
                 <Td>{p.data.description}</Td>
                 <Td>
-                  <Button bgColor='#ff99fe' onClick={() => navigate(`/project-detail/${p.data.id}/${index}`)}>
+                  <Button bgColor='#ff99fe' onClick={() => navigate(`/project-detail/${p.data.id}/${p.data.id}`)}>
                     View
                   </Button>
                 </Td>
