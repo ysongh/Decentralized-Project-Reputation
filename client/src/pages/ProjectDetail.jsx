@@ -91,9 +91,15 @@ function ProjectDetail({ ethAddress, contractDPR }) {
       <FormControl mt='3' mb='6'>
         <FormLabel htmlFor='description'>Comment</FormLabel>
         <Textarea value={comment} onChange={(e) => setComment(e.target.value)} />
-        <Button bgColor='#ff99fe' mt='1' onClick={() => addComment(moreproject.id, comment)} isLoading={loadComment} loadingText='Adding'>
-          Add
-        </Button>
+        {comment
+          ? <Button bgColor='#ff99fe' mt='1' onClick={() => addComment(moreproject.id, comment)} isLoading={loadComment} loadingText='Adding'>
+              Add
+            </Button>
+          :  <Button mt='1' cursor="not-allowed">
+              Add
+            </Button>
+        }
+        
       </FormControl>
       {moreproject?.comments?.map((comment, index) => (
         <Flex mb='3'>
