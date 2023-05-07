@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/react';
+import { Container, Box, Flex, Heading, Spacer, Badge, Button, Link } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 import ProjectReputation from "../../artifacts/contracts/ProjectReputation.sol/ProjectReputation.json";
@@ -7,6 +8,8 @@ import ProjectReputation from "../../artifacts/contracts/ProjectReputation.sol/P
 const SCROLL_CONTRACT_ADDRESS = "0xB7041238e3f1985b0a6A2AC07d48335E262aaF3E";
 
 function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
+  const [chainName, setChainName] = useState('');
+
   const connectMetamask = async () => {
     try{
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -18,6 +21,7 @@ function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
       const contract = new ethers.Contract(SCROLL_CONTRACT_ADDRESS, ProjectReputation.abi, signer);
       console.log(contract);
       setContractDPR(contract);
+      setChainName("Scroll Test");
 
     } catch(error) {
       console.error(error);
@@ -38,6 +42,7 @@ function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
           <Link as={ReactLink} to="/add-project">Add Project</Link>
           <Link as={ReactLink} to="/test">Test</Link>
           <Spacer />
+          {chainName && <p><Badge bgColor="#ff99fe" fontSize='.9rem'>{chainName}</Badge></p>}
           <Button onClick={connectMetamask} bgColor='#ff99fe'>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
