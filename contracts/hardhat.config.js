@@ -11,6 +11,12 @@ module.exports = {
       accounts: [process.env.PRIVATEKEY],
       chainId: 534353
     },
+    // npx hardhat run scripts/sdeploy.js --network bsctestnet
+    bsctestnet: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      accounts: [process.env.PRIVATEKEY],
+      chainId: 97,
+    },
   },
   // set the path to compile the contracts
   paths: {
