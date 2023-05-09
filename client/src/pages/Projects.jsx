@@ -35,6 +35,11 @@ function Projects({ contractDPR }) {
     }
   }
 
+  const getRating = (ratings) => {
+    const total = ratings.reduce((a, b) => a + b, 0);
+    return (total / ratings.length) || "No Rating";
+  } 
+
   return (
     <Container maxW='1000px'>
       <Heading>Projects</Heading>
@@ -45,6 +50,7 @@ function Projects({ contractDPR }) {
               <Th>ID</Th>
               <Th>Name</Th>
               <Th>Description</Th>
+              <Th>Rating</Th>
               <Th></Th>
             </Tr>
           </Thead>
@@ -54,6 +60,7 @@ function Projects({ contractDPR }) {
                 <Td>{p.data.id}</Td>
                 <Td>{p.data.name}</Td>
                 <Td>{p.data.description}</Td>
+                <Td>{getRating(p.data.ratings)}</Td>
                 <Td>
                   <Button bgColor='#ff99fe' onClick={() => navigate(`/project-detail/${p.data.id}/${p.data.id}`)}>
                     View
