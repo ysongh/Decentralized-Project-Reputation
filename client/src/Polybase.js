@@ -1,7 +1,7 @@
 import { Polybase } from "@polybase/client";
 
 const db = new Polybase({
-  defaultNamespace: "projecttime4",
+  defaultNamespace: "projecttime5",
 });
 
 export const createCollection = async () => {
@@ -29,12 +29,12 @@ export const createCollection = async () => {
           this.comments.push(comment);
         }
 
-        addRating (num: string) {
+        addRating (num: number) {
           this.ratings.push(num);
         }
       }
     `,
-      "projecttime4"
+      "projecttime5"
     ); // your-namespace is optional if you have defined a default namespace
   } catch (error) {
     console.log(error);
