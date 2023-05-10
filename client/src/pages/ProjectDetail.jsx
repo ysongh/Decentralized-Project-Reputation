@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, FormControl, FormLabel, Textarea, Flex, Box, Avatar, Heading, Button } from '@chakra-ui/react';
 
-import { getProjectFromPB, addCommentToPB } from '../Polybase';
+import { getProjectFromPB, addCommentToPB, addRatingToPB } from '../Polybase';
 import RateModal from "../components/RateModal";
 
 function ProjectDetail({ ethAddress, contractDPR }) {
@@ -57,9 +57,10 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const rateProject = async (num) => {
     try {
-      const transaction = await contractDPR.rateAProject(id - 1, num);
-      const tx = await transaction.wait();
-      console.log(tx);
+      // const transaction = await contractDPR.rateAProject(id - 1, num);
+      // const tx = await transaction.wait();
+      // console.log(tx);
+      addRatingToPB(id, +num);
     } catch(error) {
       console.error(error);
     }

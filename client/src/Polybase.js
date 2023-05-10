@@ -84,3 +84,15 @@ export const addCommentToPB = async (id, comment) => {
     return null;
   }
 }
+
+export const addRatingToPB = async (id, num) => {
+  try{
+    const data = await db.collection("Project")
+      .record(id)
+      .call("addRating", [num]);
+    return data.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
