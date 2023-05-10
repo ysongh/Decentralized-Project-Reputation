@@ -32,7 +32,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const getProject = async () => {
     try {
-      const projectData = await contractDPR.getRatingsByProject(id);
+      const projectData = await contractDPR.getRatingsByProject(id - 1);
      
       const scores = projectData.toString().split(",");
       let total = 0;
@@ -57,7 +57,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const rateProject = async (num) => {
     try {
-      const transaction = await contractDPR.rateAProject(id, num);
+      const transaction = await contractDPR.rateAProject(id - 1, num);
       const tx = await transaction.wait();
       console.log(tx);
     } catch(error) {
