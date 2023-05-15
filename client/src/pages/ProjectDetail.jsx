@@ -13,6 +13,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
   const [showRateModal, setShowRateModal] = useState(false);
   const [comment, setComment] = useState("");
   const [loadComment, setLoadComment] = useState(false);
+  const [loadRate, setLoadRate] = useState(false);
 
   useEffect(() => {
     if(contractDPR) getProject()
@@ -58,12 +59,17 @@ function ProjectDetail({ ethAddress, contractDPR }) {
 
   const rateProject = async (num) => {
     try {
+      setLoadRate(true);
+
       const transaction = await contractDPR.rateAProject(id - 1, num);
       const tx = await transaction.wait();
       console.log(tx);
       addRatingToPB(id, +num);
+
+      setLoadRate(false);
     } catch(error) {
       console.error(error);
+      setLoadRate(false);
     }
   }
 
@@ -110,6 +116,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
         </Flex>
       ))}
       <RateModal
+        loadRate={loadRate}
         showRateModal={showRateModal}
         closeRateModal={closeRateModal}
         rateProject={rateProject}  />

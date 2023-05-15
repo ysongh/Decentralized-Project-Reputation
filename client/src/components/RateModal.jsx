@@ -13,7 +13,7 @@ import {
   Button
 } from '@chakra-ui/react';
 
-function RateModal({ showRateModal, closeRateModal, rateProject }) {
+function RateModal({ loadRate, showRateModal, closeRateModal, rateProject }) {
   const [num, setNum] = useState("");
 
   return (
@@ -34,7 +34,7 @@ function RateModal({ showRateModal, closeRateModal, rateProject }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button bgColor='#ba52ed' mr={3} onClick={() => rateProject(num)}>
+            <Button bgColor='#ba52ed' mr={3} onClick={() => rateProject(num)} isLoading={loadRate} loadingText='Submitting'>
               Rate
             </Button>
             <Button onClick={closeRateModal}>Cancel</Button>
