@@ -27,6 +27,13 @@ function AddProject({ contractDPR }) {
     }
   }
 
+
+  const handleUpload = async (event) => {
+    const image = event.target.files[0];
+    console.log(image);
+  }
+
+
   return (
     <Container maxW='1000px'>
       <Center>
@@ -43,6 +50,10 @@ function AddProject({ contractDPR }) {
           <FormControl mb='3'>
             <FormLabel htmlFor='description'>Description</FormLabel>
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+          </FormControl>
+          <FormControl mb='3'>
+            <FormLabel htmlFor='images'>Choose Images</FormLabel>
+            <input type='file' id='images' onChange={handleUpload}/>
           </FormControl>
 
           {contractDPR
