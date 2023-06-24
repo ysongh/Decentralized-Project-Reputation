@@ -11,11 +11,17 @@ module.exports = {
       accounts: [process.env.PRIVATEKEY],
       chainId: 534353
     },
-    // npx hardhat run scripts/sdeploy.js --network bsctestnet
+    // npx hardhat run scripts/deploy.js --network bsctestnet
     bsctestnet: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       accounts: [process.env.PRIVATEKEY],
       chainId: 97,
+    },
+    // npx hardhat run scripts/deploy.js --network hackathonsilo
+    hackathonsilo: {
+      url: "http://hackathon.aurora.dev",
+      accounts: [process.env.PRIVATEKEY],
+      chainId: 1313161558,
     },
   },
   // set the path to compile the contracts
