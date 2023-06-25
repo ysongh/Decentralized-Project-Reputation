@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Container, Center, Box, FormControl, FormLabel, Input, Textarea, Heading, Text, Button } from '@chakra-ui/react';
+import axios from "axios";
 
 import { addProjectToPB } from '../Polybase';
+import { PINATA_APIKEY, PINATA_SECRETAPIKEY } from "../keys";
 
 function AddProject({ contractDPR }) {
   const [address, setAddress] = useState("");
@@ -31,6 +33,20 @@ function AddProject({ contractDPR }) {
   const handleUpload = async (event) => {
     const image = event.target.files[0];
     console.log(image);
+
+    let data = new FormData();
+    data.append('file', image);
+    const res = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", data, {
+      maxContentLength: "Infinity",
+      headers: {
+        "Content-Type": 'multipart/form-data',
+        pinata_api_key: PINATA_APIKEY, 
+        pinata_secret_api_key: PINATA_SECRETAPIKEY,
+      }
+    })
+
+    let url = "https://gateway.pinata.cloud/ipfs/" + res.data.IpfsHash;
+    console.log(url);
   }
 
 

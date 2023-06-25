@@ -19,6 +19,7 @@ artifacts
 cache
 .env
 build
+keys.js
 
 # Editor directories and files
 .vscode/*
