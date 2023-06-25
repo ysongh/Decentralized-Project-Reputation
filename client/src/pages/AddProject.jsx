@@ -10,12 +10,13 @@ function AddProject({ contractDPR }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState("");
+  const [projectURL, setProjectURL] = useState("");
 
   const submitProject = async () => {
     try {
       setLoading(true);
       
-      const transaction = await contractDPR.addProject(address);
+      const transaction = await contractDPR.addProject(address, projectURL);
       const tx = await transaction.wait();
       console.log(tx);
 
@@ -47,6 +48,7 @@ function AddProject({ contractDPR }) {
 
     let url = "https://gateway.pinata.cloud/ipfs/" + res.data.IpfsHash;
     console.log(url);
+    setProjectURL(url);
   }
 
 
