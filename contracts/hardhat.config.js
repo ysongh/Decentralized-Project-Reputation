@@ -17,6 +17,11 @@ module.exports = {
       accounts: [process.env.PRIVATEKEY],
       chainId: 97,
     },
+    // npx hardhat run scripts/deploy.js --network mumbai
+    "mumbai": {
+      url: "https://rpc-mumbai.maticvigil.com/",
+      accounts: [process.env.PRIVATEKEY],
+    },
     // npx hardhat run scripts/deploy.js --network hackathonsilo
     hackathonsilo: {
       url: "http://hackathon.aurora.dev",
