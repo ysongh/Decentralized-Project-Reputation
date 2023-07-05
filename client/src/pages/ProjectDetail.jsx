@@ -14,6 +14,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
   const [comment, setComment] = useState("");
   const [loadComment, setLoadComment] = useState(false);
   const [loadRate, setLoadRate] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     if(contractDPR) getProject()
@@ -34,6 +35,10 @@ function ProjectDetail({ ethAddress, contractDPR }) {
   const getProject = async () => {
     try {
       const projectId = id - 1;
+
+      const data = await contractDPR.projects(projectId.toString());
+      setImage(data.projectURL);
+
       const projectData = await contractDPR.getRatingsByProject(projectId.toString());
      
       const scores = projectData.toString().split(",");
@@ -95,6 +100,7 @@ function ProjectDetail({ ethAddress, contractDPR }) {
         <Button bgColor="#ba52ed" mt='2' onClick={openRateModal}>
           Rate
         </Button>
+        {image && <img src={image} alt="Project Image" />}
       </Box>
       <FormControl mt='3' mb='6'>
         <FormLabel htmlFor='description'>Comment</FormLabel>

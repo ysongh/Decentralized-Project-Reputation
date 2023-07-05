@@ -8,6 +8,7 @@ import ProjectReputation from "../../artifacts/contracts/ProjectReputation.sol/P
 const SCROLL_CONTRACT_ADDRESS = "0xB7041238e3f1985b0a6A2AC07d48335E262aaF3E";
 const BSC_CONTRACT_ADDRESS = "0xFda2FCAB7c8c2FDB3Ef69C37Ee94f1e7A94f0eD3";
 const SLIO_CONTRACT_ADDRESS = "0x3060F1B52BE664756757ea787c08b252Ca85F303";
+const POLYGON_CONTRACT_ADDRESS = "0xefD210188223eA130eDF3De2010Cb35cb733D910";
 
 function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
   const [chainName, setChainName] = useState('');
@@ -30,10 +31,10 @@ function Navbar({ ethAddress, setETHAddress, setContractDPR }) {
       // setContractDPR(contract);
       // setChainName("BSC");
 
-      const contract = new ethers.Contract(SLIO_CONTRACT_ADDRESS, ProjectReputation.abi, signer);
+      const contract = new ethers.Contract(POLYGON_CONTRACT_ADDRESS, ProjectReputation.abi, signer);
       console.log(contract);
       setContractDPR(contract);
-      setChainName("SLIO");
+      setChainName("POLYGON");
 
     } catch(error) {
       console.error(error);
