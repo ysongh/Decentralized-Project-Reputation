@@ -28,6 +28,12 @@ module.exports = {
       accounts: [process.env.PRIVATEKEY],
       chainId: 1313161558,
     },
+     // npx hardhat run scripts/deploy.js --network pegasuslightlink
+     pegasuslightlink: {
+      url: "https://replicator.pegasus.lightlink.io/rpc/v1",
+      accounts: [process.env.PRIVATEKEY],
+      chainId: 1891,
+    },
   },
   // set the path to compile the contracts
   paths: {
